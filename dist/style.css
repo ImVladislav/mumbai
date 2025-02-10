@@ -624,3 +624,107 @@ body {
   position: relative;
   z-index: 2; /* Забезпечує, щоб ці елементи були поверх canvas */
 }
+
+
+
+
+
+
+
+
+/* Фон для глобуса */
+#elm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Відправляємо на фон */
+  background-color: transparent;
+  overflow: hidden;
+}
+
+/* Основний контейнер сайту */
+.container {
+  position: relative; /* Робимо його поверх #elm */
+  z-index: 1;
+  text-align: center;
+  padding: 20px;
+  color: white;
+}
+
+/* Прогрес-бар (внизу екрану) */
+.progress-bar {
+  position: fixed;
+  bottom: 20px; /* Відстань від нижнього краю */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 80%;
+  max-width: 800px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* Анімація підсвічування */
+.progress-bar:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+     90deg,
+     transparent,
+     rgba(255, 255, 255, 0.2),
+     transparent
+  );
+  transition: 0.5s;
+}
+
+.progress-bar:hover::before {
+  left: 100%;
+  transition: 0.5s;
+}
+
+/* Текст у прогрес-барі */
+.progress-text {
+  color: white;
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+/* Адаптивність */
+@media screen and (max-width: 768px) {
+  .progress-bar {
+    width: 90%;
+    height: 40px;
+  }
+
+  .progress-text {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .progress-bar {
+    height: 35px;
+  }
+
+  .progress-text {
+    font-size: 8px;
+  }
+}
