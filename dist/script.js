@@ -41,21 +41,36 @@ d3.json('//static.redsift.io/three/t3-rs-geo/latest/grid-hq.json', function (wor
       requestAnimationFrame(tick);
     })();
 
-    setTimeout(function () {
+    setTimeout(() => {
       globe.addMarker(51.5074, -0.1278, "London");
       globe.addMarker(50.1109, 8.6821, "Frankfurt", true);
     }, 2000);
-    setTimeout(function () {
-      globe.addMarker(19.07283, 72.88261, "Mumbai", true);
+
+    setTimeout(() => {
+      const mumbaiMarker = globe.addMarker(19.07283, 72.88261, "Mumbai", true);
+      
+      // Додаємо обробник кліку для мітки Mumbai
+      mumbaiMarker.onClick = () => {
+        alert("Ви натиснули на Mumbai! 🎉");
+        window.open("https://en.wikipedia.org/wiki/Mumbai", "_blank"); // Відкриває Wikipedia у новому вікні
+      };
+
     }, 2000 + 5000);
 
-    // Handle window resize events
-    window.addEventListener('resize',
-    onWindowResize => globe.resize(node.clientWidth, node.clientHeight),
-    false);
+    // Обробка зміни розміру вікна
+    window.addEventListener(
+      "resize",
+      () => globe.resize(node.clientWidth, node.clientHeight),
+      false
+    );
 
     let autoRotate;
     let autoDayLength = globe.dayLength;
+
+
+
+
+
     // Handle dragging
     d3.selectAll('#elm > canvas').
     call(d3.drag().
